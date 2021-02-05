@@ -1,0 +1,6 @@
+SOURCE_ROOT=/home/n/ngrisoua/zemskova/Nek5000
+FC=mpifc
+FFLAGS=-march=native -r8 -fpconstant -fpp
+CC=mpicc
+CFLAGS=-O2 -march=native
+PPLIST= MPI UNDERSCORE TIMER
