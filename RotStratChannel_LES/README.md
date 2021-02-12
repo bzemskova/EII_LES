@@ -67,7 +67,7 @@ Here, "P" stands for periodic, "W" for wall (i.e., no-slip), and "I" for insulat
 `parameter (lx1=8)                ! GLL points per element along each direction`\
 This is the recommended value for optimal code performance. It means that if you need greater resolution, need to add more elements in .box file rather than increasing lx1 value.
 * De-aliasing:\
-`parameter (lxd=12)               ! GL  points for over-integration (dealiasing)`
+`parameter (lxd=12)               ! GL  points for over-integration (dealiasing)`\
 This is the optimal value, given that lx1=8.
 * Number of elements: these are value from .box file in x,y,z directions\
 `parameter (lelg=8*256*24)        ! max total number of elements`
