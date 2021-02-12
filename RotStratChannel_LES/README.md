@@ -49,3 +49,15 @@ Here, "P" stands for periodic, "W" for wall (i.e., no-slip), and "I" for insulat
 * Going over different subroutines:
   * **subroutine uservp** (do not change):\
      defines viscosity (small scale + LES closure scheme, i.e. <img src="https://render.githubusercontent.com/render/math?math=\nu_{tot} = \nu%2B\nu_{LES}">) and similarly diffusivity (small scale + LES closure scheme, i.e. <img src="https://render.githubusercontent.com/render/math?math=\kappa_{tot} = \kappa%2B\nu_{LES}/Pr_t">), where <img src="https://render.githubusercontent.com/render/math?math=\nu,\kappa"> are defined as "viscosity" and "conductivity" in .par file and <img src="https://render.githubusercontent.com/render/math?math=Pr_t"> is user-defined turbulent Prandtl number (also defined in .par file)
+  * **subroutine userf** (do not change):\
+      defines added forcing terms to momentum equations, i.e., Coriolis forcing (in x and y directions) and buoyancy forcing in z direction
+  * **subroutine userq** (not used):\
+      defines added source/sink terms for scalar/buoyancy equation (not needed)
+  * **subroutine userchk** (do not change for now):\
+      used for many things, including defining LES subgrid closure. Also can include post-processing or on-the-fly processing code (not currently inserted)
+  * **subroutine userbc (may be change later):**\
+      used for user-defined non-zero boundary conditions, e.g., non-zero Dirichelet boundary conditions or non-zero flux conditions. When implementing wind stress, this subroutine will need to be modified.
+  * **subroutine useric (change):**\
+      defines initial conditions for each velocity component (ux, uy, uz) and scalar (buoyancy/temperature, i.e., temp). Currently, velocities ICs are set to random noise and buoyancy to linear stratification. Will need to adjust to desired configuration later.
+  * **subroutine usrdat** (do not change for now):\
+      re-scales domain size before running the simulation and pre-fills/initializes viscosity matrix for LES with <img src="https://render.githubusercontent.com/render/math?math=\nu">. This subroutine is only called once.
