@@ -39,7 +39,7 @@ Here, "P" stands for periodic, "W" for wall (i.e., no-slip), and "I" for insulat
 * Change end time of simulation (either in terms of simulation time or number of time steps) and the interval for checkpoint saving (also in terms of simulation run time or number of time steps)
 * Change initial time step size (I suggest keeping "variableDt = yes" which will decrease time step if CFL condition is not met)
 * If restarting simulation from checkpoint, uncomment and change:\
-`startFrom = restart_filename`\
+`startFrom = restart_filename`
 * Change values for user-defined parameters (which are used in .usr file subroutines), namely, Coriolis parameter, turbulent Prandtl number (needed for LES scheme of buoyancy field), and Richardson number (needed for adding stratification in non-dimensionalized Navier-Stokes solved by the code)
 * Change "viscosity" value, which is basically 1/Re (Re: Reynolds number)
 * Change "conductivity" value, which is viscosity/Pr (Pr: Prandtl number, different from turbulent Prandtl number)
@@ -61,3 +61,17 @@ Here, "P" stands for periodic, "W" for wall (i.e., no-slip), and "I" for insulat
       defines initial conditions for each velocity component (ux, uy, uz) and scalar (buoyancy/temperature, i.e., temp). Currently, velocities ICs are set to random noise and buoyancy to linear stratification. Will need to adjust to desired configuration later.
   * **subroutine usrdat** (do not change for now):\
       re-scales domain size before running the simulation and pre-fills/initializes viscosity matrix for LES with <img src="https://render.githubusercontent.com/render/math?math=\nu">. This subroutine is only called once.
+
+## Changing discretization, number of cores, dealiasing (in SIZE file)
+* Re-vising the discretization discussed in .box file, set the value by which to discretize each element defined in .box file with:\
+`parameter (lx1=8)                ! GLL points per element along each direction`\
+This is the recommended value for optimal code performance. It means that if you need greater resolution, need to add more elements in .box file rather than increasing lx1 value.
+* De-aliasing:\
+`parameter (lxd=12)               ! GL  points for over-integration (dealiasing)`
+This is the optimal value, given that lx1=8.
+* Number of elements: these are value from .box file in x,y,z directions\
+`parameter (lelg=8*256*24)        ! max total number of elements`
+* Maximum and minimum number of cores to be used:\
+`parameter (lpmin=120)              ! min MPI ranks`\
+`parameter (lpmax=300)             ! max MPI ranks`\
+Because of the memory allocation/use, this need to be adjusted before running the code and requires some playing around. If lpmin is too small, you will get "overflowing" error after compiling, and will need to increase it and re-compile again.
