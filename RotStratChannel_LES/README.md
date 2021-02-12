@@ -23,8 +23,7 @@ num: number of cores used to run the simulation
 
 ## How to change boundary conditions and domain size (.box file)
 * To edit the number of disrectized elements for each spatial dimension (x,y,z), change this line:\
-`-8  -256  -24 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; nelx,nely,nelz for Box`\
-
+`-8  -256  -24  nelx,nely,nelz for Box`\
 "-" in front of the number means that the elements are uniform size. If want non-uniform and wish to specify spacing, omit "-". Also, this is not the final resolution. Resolution of the simulation is each of these numbers multiplied by N, which is defined in SIZE file, i.e., here there are 8 elements in x-direction, which are then subdivided by N=8 (from SIZE), so the total number of grid cells in x-direction is 64 (and subsequently, 2048 grid cells in y and 192 in z).
 * The actual domain size is specified in the next three lines:\
 0 62.5 1.                                         x0,x1,ratio \
