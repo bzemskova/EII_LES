@@ -7,7 +7,7 @@ Currently implementing:
 * doubly-periodic boundary conditions with solid wall, no-flux buoyancy boundaries on top and bottom
 
 ## How to run a simulation:
-* If need to regenerate a new domain (i.e., after changes of boundary conditions or domain size):
+* If need to regenerate a new domain (i.e., after changes of boundary conditions or domain size):\
 `$ $nekpath$/Nek5000/bin/genbox`
 when prompted type "turbChannel.box". After it runs, copy the generated file:
 `cp box.re2 turbChannel.re2`
